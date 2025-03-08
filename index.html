@@ -26,9 +26,17 @@
         <div class="wizard-container">
             <!-- Introduction -->
             <div class="intro-section">
-                <h4>Easily generate a clear, compliant Privacy & Cookies Policy for use on your nonprofit's website. </h4>
-                <p>A Privacy and Cookies Policy should outline how an organization collects, uses, stores, and protects personal data and cookies, while informing users of their rights and how to manage their data preferences. </p>
-                <a href="https://policy.nonprofittools.org/disclaimer" class="disclaimer-btn"><i class="fas fa-info-circle"></i> View our full disclaimer before using this tool.</a>
+                <h4>Easily generate a Privacy & Cookies Policy for use on your nonprofit's website. </h4>
+                <div class="info-bubble">
+                    <div class="info-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="info-content">
+                        A Privacy and Cookies Policy should outline how an organization collects, uses, stores, and protects personal data and cookies, while informing users of their rights and how to manage their data preferences.
+                    </div>
+                </div>
+                
+                <a target="_blank" href="https://policy.nonprofittools.org/disclaimer" class="disclaimer-btn"><i class="fas fa-exclamation-circle"></i> View our full disclaimer before using this tool.</a>
             </div>
 
             <!-- Progress Bar -->
@@ -202,12 +210,16 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <a href="https://goodhearttech.org/" target="_blank" rel="noopener">
-                <img src="https://graphics.goodhearttech.org/GHT-AllWhiteLogo-phishsite.png" alt="Good Heart Tech Logo" class="logo">
-            </a>
-            <p>&copy; <span id="current-year"></span> Good Heart Tech. All rights reserved.</p>
+            <div class="footer-logo">
+                <a href="https://goodhearttech.org/" target="_blank" rel="noopener">
+                    <img src="https://graphics.goodhearttech.org/GHT-AllWhiteLogo-phishsite.png" alt="Good Heart Tech Logo" class="logo">
+                </a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; <span id="current-year"></span> Good Heart Tech. All rights reserved.</p>
+            </div>
             <div class="footer-links">
-                <a href="https://policy.nonprofittools.org/disclaimer">Disclaimer</a>
+                <a target="_blank" href="https://policy.nonprofittools.org/disclaimer">Disclaimer</a>
             </div>
         </div>
     </footer>

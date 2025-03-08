@@ -74,7 +74,7 @@ body {
 
 /* Main Content Styles */
 .main-content {
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 0 20px;
 }
@@ -86,11 +86,43 @@ body {
     overflow: hidden;
 }
 
-/* Introduction Section */
+/* Info bubble styling */
+.info-bubble {
+    display: flex;
+    background-color: rgba(108, 156, 224, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.info-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* Intro section styling improvements */
 .intro-section {
     padding: 30px;
     border-bottom: 1px solid var(--border-color);
     text-align: center;
+}
+
+.intro-section h4 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: var(--text-color);
 }
 
 .intro-section p {

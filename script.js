@@ -52,20 +52,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentStepText = document.getElementById('current-step');
     const steps = document.querySelectorAll('.step');
     
-    // Form elements
-    const websiteUrlInput = document.getElementById('org-website');
-    const urlValidationMessage = document.getElementById('url-validation-message');
-    const noDataCollectionCheckbox = document.getElementById('no-data-collection');
-    const dataCollectionOptions = document.querySelector('.data-collection-options');
-    const dataTypeCheckboxes = document.querySelectorAll('.data-collection-options input[name="data-type"]');
-    
     // Initialize the wizard
     let currentStep = 1;
     updateProgressBar();
     
     // URL validation
-    websiteUrlInput.addEventListener('input', validateUrl);
-    websiteUrlInput.addEventListener('blur', validateUrl);
+    const websiteUrlInput = document.getElementById('org-website');
+    const urlValidationMessage = document.getElementById('url-validation-message');
+    
+    if (websiteUrlInput) {
+        websiteUrlInput.addEventListener('input', validateUrl);
+        websiteUrlInput.addEventListener('blur', validateUrl);
+    }
     
     function validateUrl() {
         const url = websiteUrlInput.value.trim();
@@ -93,37 +91,102 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // "We don't collect any personal information" checkbox
-    noDataCollectionCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            // Disable and uncheck all other data collection options
-            dataTypeCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-                checkbox.disabled = true;
-            });
-            dataCollectionOptions.classList.add('disabled');
-        } else {
-            // Enable all data collection options
-            dataTypeCheckboxes.forEach(checkbox => {
-                checkbox.disabled = false;
-            });
-            dataCollectionOptions.classList.remove('disabled');
-        }
-    });
+    // DATA COLLECTION LOGIC - Question 2
+    const noDataCollectionCheckbox = document.getElementById('no-data-collection');
+    const dataCollectionOptions = document.querySelector('.data-collection-options');
     
-    // Other data collection checkboxes should uncheck "We don't collect any personal information"
-    dataTypeCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            if (this.checked && noDataCollectionCheckbox.checked) {
-                noDataCollectionCheckbox.checked = false;
-                // Re-enable all checkboxes
-                dataTypeCheckboxes.forEach(cb => {
-                    cb.disabled = false;
+    if (noDataCollectionCheckbox && dataCollectionOptions) {
+        const dataTypeCheckboxes = document.querySelectorAll('.data-collection-options input[type="checkbox"]');
+        
+        // "We don't collect any personal information" checkbox
+        noDataCollectionCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                // Disable and uncheck all other data collection options
+                dataTypeCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                    checkbox.disabled = true;
+                });
+                dataCollectionOptions.classList.add('disabled');
+            } else {
+                // Enable all data collection options
+                dataTypeCheckboxes.forEach(checkbox => {
+                    checkbox.disabled = false;
                 });
                 dataCollectionOptions.classList.remove('disabled');
             }
         });
-    });
+        
+        // Other data collection checkboxes should uncheck "We don't collect any personal information"
+        dataTypeCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked && noDataCollectionCheckbox.checked) {
+                    noDataCollectionCheckbox.checked = false;
+                    // Re-enable all checkboxes
+                    dataTypeCheckboxes.forEach(cb => {
+                        cb.disabled = false;
+                    });
+                    dataCollectionOptions.classList.remove('disabled');
+                }
+            });
+        });
+    }
+    
+    // COOKIE USAGE LOGIC - Question 3 (completely separate from data collection)
+    const cookieCheckboxes = document.querySelectorAll('input[name="cookie-type"]');
+    const noCookiesCheckbox = document.querySelector('input[name="cookie-type"][value="none"]');
+    
+    if (noCookiesCheckbox) {
+        noCookiesCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                // Uncheck and disable all other cookie options
+                cookieCheckboxes.forEach(checkbox => {
+                    if (checkbox.value !== 'none') {
+                        checkbox.checked = false;
+                        checkbox.disabled = true;
+                    }
+                });
+            } else {
+                // Enable all cookie options and check the default ones
+                cookieCheckboxes.forEach(checkbox => {
+                    checkbox.disabled = false;
+                    if (checkbox.id === 'essential-cookies') {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+        });
+        
+        // Other cookie checkboxes should uncheck "We Don't Use Cookies"
+        cookieCheckboxes.forEach(checkbox => {
+            if (checkbox.value !== 'none') {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked && noCookiesCheckbox.checked) {
+                        noCookiesCheckbox.checked = false;
+                        // Re-enable all cookie checkboxes
+                        cookieCheckboxes.forEach(cb => {
+                            cb.disabled = false;
+                        });
+                    }
+                });
+            }
+        });
+    }
+    
+    // DATA SHARING LOGIC - Question 4
+    const dataSharingRadios = document.querySelectorAll('input[name="data-sharing"]');
+    const sharingDetails = document.querySelector('.sharing-details');
+    
+    if (dataSharingRadios.length > 0 && sharingDetails) {
+        dataSharingRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'yes' || this.value === 'limited') {
+                    sharingDetails.style.display = 'block';
+                } else {
+                    sharingDetails.style.display = 'none';
+                }
+            });
+        });
+    }
     
     // Next button click handlers
     nextButtons.forEach(button => {
@@ -160,66 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
             currentStep = prevStep;
             updateProgressBar();
         });
-    });
-    
-    // Data sharing radio buttons
-    const dataSharingRadios = document.querySelectorAll('input[name="data-sharing"]');
-    const sharingDetails = document.querySelector('.sharing-details');
-    
-    dataSharingRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.value === 'yes' || this.value === 'limited') {
-                sharingDetails.style.display = 'block';
-            } else {
-                sharingDetails.style.display = 'none';
-            }
-        });
-    });
-    
-    // "We Don't Use Cookies" checkbox logic
-    const cookieCheckboxes = document.querySelectorAll('input[name="cookie-type"]');
-    const noCookiesCheckbox = document.querySelector('input[value="none"]');
-    
-    noCookiesCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            // Uncheck and disable all other cookie options
-            cookieCheckboxes.forEach(checkbox => {
-                if (checkbox.value !== 'none') {
-                    checkbox.checked = false;
-                    checkbox.disabled = true;
-                }
-            });
-        } else {
-            // Enable all cookie options and check only the essential cookies by default
-            cookieCheckboxes.forEach(checkbox => {
-                checkbox.disabled = false;
-                if (checkbox.id === 'essential-cookies') {
-                    checkbox.checked = true;
-                }
-            });
-        }
-    });
-    
-    // Other cookie checkboxes should uncheck "We Don't Use Cookies"
-    cookieCheckboxes.forEach(checkbox => {
-        if (checkbox.value !== 'none') {
-            checkbox.addEventListener('change', function() {
-                if (this.checked && noCookiesCheckbox.checked) {
-                    noCookiesCheckbox.checked = false;
-                    // Re-enable all checkboxes
-                    cookieCheckboxes.forEach(cb => {
-                        cb.disabled = false;
-                    });
-                }
-            });
-        }
-    });
-    
-    // Generate button click handler
-    generateButton.addEventListener('click', function() {
-        if (validateCurrentStep(currentStep)) {
-            generatePrivacyPolicy();
-        }
     });
     
     // Update progress bar and step indicators
@@ -276,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
             case 2:
                 // Validate data collection (at least one checkbox)
                 const noDataCollection = document.getElementById('no-data-collection').checked;
-                const dataTypes = document.querySelectorAll('.data-collection-options input[name="data-type"]:checked');
+                const dataTypes = document.querySelectorAll('.data-collection-options input[type="checkbox"]:checked');
                 
                 if (!noDataCollection && dataTypes.length === 0) {
                     alert('Please select at least one type of data that you collect or select "We don\'t collect any personal information".');
@@ -347,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             dataCollection: {
                 collectsNoData: document.getElementById('no-data-collection').checked,
-                types: Array.from(document.querySelectorAll('.data-collection-options input[name="data-type"]:checked')).map(cb => cb.value)
+                types: Array.from(document.querySelectorAll('.data-collection-options input[type="checkbox"]:checked')).map(cb => cb.value)
             },
             cookieUsage: Array.from(document.querySelectorAll('input[name="cookie-type"]:checked')).map(cb => cb.value),
             dataSharing: {
@@ -368,8 +371,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // For now, we'll just show an alert
         alert('Your privacy policy is being generated! In a real implementation, you would see your completed policy here or be able to download it.');
-        
-        // You could redirect to a results page
-        // window.location.href = 'policy-result.html';
+    }
+    
+    // Add event listener for generate button
+    if (generateButton) {
+        generateButton.addEventListener('click', function() {
+            if (validateCurrentStep(currentStep)) {
+                generatePrivacyPolicy();
+            }
+        });
     }
 }); 

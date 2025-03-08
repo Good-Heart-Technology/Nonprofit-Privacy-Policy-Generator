@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nonprofit Policy Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Using Font Awesome 6 CDN for more reliable icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <header class="header">
+        <div class="header-content">
+            <h1>Nonprofit Policy Generator</h1>
+            <div class="provider">
+                <span>Provided by</span>
+                <a href="https://goodhearttech.org/" target="_blank" rel="noopener">
+                    <img src="https://graphics.goodhearttech.org/GHT-AllWhiteLogo-phishsite.png" alt="Good Heart Tech Logo" class="logo">
+                </a>
+            </div>
+        </div>
+        <div class="header-pattern"></div>
+    </header>
+
+    <main class="main-content">
+        <div class="policy-grid">
+            <!-- Policy Tiles - Each entire tile is now clickable -->
+            <a href="https://privacy.nonprofittools.org" class="policy-tile" target="_blank" rel="noopener">
+                <div class="icon-container">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h2>Privacy & Cookies Policy Generator</h2>
+                <div class="launch-btn">
+                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+            </a>
+
+            <div class="policy-tile disabled">
+                <div class="icon-container">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <h2>Acceptable Use Policy Generator</h2>
+                <div class="launch-btn disabled-btn">
+                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+            </div>
+
+            <div class="policy-tile disabled">
+                <div class="icon-container">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h2>Artificial Intelligence Policy Generator</h2>
+                <div class="launch-btn disabled-btn">
+                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+            </div>
+
+            <div class="policy-tile disabled">
+                <div class="icon-container">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h2>Mobile Device Policy Generator</h2>
+                <div class="launch-btn disabled-btn">
+                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legal Disclaimer - Moved above the toggle -->
+        <div class="disclaimer">
+            <h2>Important Legal Disclaimer</h2>
+            <p>
+                Laws and regulations can vary significantly by region, jurisdiction, and industry. The generated policies may not be legally compliant in your specific area or for your particular use case.
+            </p>
+            <p class="emphasis">
+                We strongly recommend having any generated policy reviewed and updated by qualified legal counsel before implementation or distribution to ensure it meets your specific needs and complies with all applicable laws and regulations.
+            </p>
+            <p>
+                Good Heart Tech is not a law firm and does not provide legal advice. The tools and templates provided here come with absolutely no warranty or guarantee of legal compliance.
+            </p>
+        </div>
+
+        <!-- FAQ Toggle - Now below the disclaimer with improved appearance and open by default -->
+        <div class="faq-section">
+            <button class="faq-toggle" onclick="toggleFAQ()">
+                <span>Why do you only offer these policies and not other ones?</span>
+                <div class="toggle-icon rotated">
+                    <i class="fa-solid fa-chevron-up" id="faq-icon"></i>
+                </div>
+            </button>
+            <div class="faq-content show" id="faq-answer">
+                <p>
+                    Good Heart Tech can only offer a limited number of templatized policies for legal reasons, and we want to be clear that we are not lawyers. Other types of policies tend to be much more specific to each organization and require deep consideration of the organization's unique mission, values, and operational context. These policies often need to be crafted with direct legal counsel to ensure they properly address the specific needs and circumstances of your organization.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="https://goodhearttech.org/" target="_blank" rel="noopener">
+                <img src="https://graphics.goodhearttech.org/GHT-AllWhiteLogo-phishsite.png" alt="Good Heart Tech Logo" class="logo">
+            </a>
+            <p>&copy; <span id="current-year"></span> Good Heart Tech. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

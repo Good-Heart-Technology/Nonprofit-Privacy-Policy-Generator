@@ -454,15 +454,28 @@ textarea:focus {
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
+}
+
+.footer-logo {
+    flex: 1;
+}
+
+.footer-copyright {
+    flex: 2;
     text-align: center;
+}
+
+.footer-links {
+    flex: 1;
+    text-align: right;
 }
 
 .footer p {
     color: var(--text-muted);
     font-size: 0.9rem;
+    margin: 0;
 }
 
 .footer-links a {
@@ -509,6 +522,18 @@ textarea:focus {
     
     .next-btn, .generate-btn {
         order: 1;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer-logo, .footer-copyright, .footer-links {
+        flex: none;
+        width: 100%;
+        text-align: center;
     }
 }
 

@@ -11,7 +11,7 @@
 <body class="dark-theme">
     <header class="header">
         <div class="header-content">
-            <h1>Nonprofit Policy Generator</h1>
+            <h1>Nonprofit Privacy & Cookies Policy Generator</h1>
             <div class="provider">
                 <span>Provided by</span>
                 <a href="https://goodhearttech.org/" target="_blank" rel="noopener">
@@ -23,75 +23,179 @@
     </header>
 
     <main class="main-content">
-        <div class="policy-grid">
-            <!-- Policy Tiles - Each entire tile is now clickable -->
-            <a href="https://privacy.nonprofittools.org" class="policy-tile" target="_blank" rel="noopener">
-                <div class="icon-container">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <h2>Privacy & Cookies Policy Generator</h2>
-                <div class="launch-btn">
-                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </div>
-            </a>
+        <div class="wizard-container">
+            <!-- Introduction -->
+            <div class="intro-section">
+                <h4>Easily generate a clear, compliant Privacy & Cookies Policy for use on your nonprofit's website. </h4>
+                <p>A Privacy and Cookies Policy should outline how an organization collects, uses, stores, and protects personal data and cookies, while informing users of their rights and how to manage their data preferences. </p>
+                <a href="https://policy.nonprofittools.org/disclaimer" class="disclaimer-btn"><i class="fas fa-info-circle"></i> View our full disclaimer before using this tool.</a>
+            </div>
 
-            <div class="policy-tile disabled">
-                <div class="icon-container">
-                    <i class="fa-solid fa-user-check"></i>
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
-                <h2>Acceptable Use Policy Generator</h2>
-                <div class="launch-btn disabled-btn">
-                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">1</div>
+                    <div class="step" data-step="2">2</div>
+                    <div class="step" data-step="3">3</div>
+                    <div class="step" data-step="4">4</div>
+                    <div class="step" data-step="5">5</div>
+                </div>
+                <div class="progress-labels">
+                    <span class="progress-text">Step <span id="current-step">1</span> of 5</span>
                 </div>
             </div>
 
-            <div class="policy-tile disabled">
-                <div class="icon-container">
-                    <i class="fa-solid fa-robot"></i>
+            <!-- Question Forms -->
+            <div class="question-forms">
+                <!-- Question 1 -->
+                <div class="question-card active" id="question-1">
+                    <h2>Organization Information</h2>
+                    <div class="form-group">
+                        <label for="org-name">What is your nonprofit's name? <span class="required">*</span></label>
+                        <input type="text" id="org-name" placeholder="e.g., Good Heart Technology" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="org-website">What is your website URL? <span class="required">*</span></label>
+                        <input type="url" id="org-website" placeholder="e.g., https://goodhearttech.org" required>
+                        <div class="validation-message" id="url-validation-message"></div>
+                    </div>
+                    <div class="button-row">
+                        <button class="btn next-btn" data-next="2">Continue <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
-                <h2>Artificial Intelligence Policy Generator</h2>
-                <div class="launch-btn disabled-btn">
-                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </div>
-            </div>
 
-            <div class="policy-tile disabled">
-                <div class="icon-container">
-                    <i class="fa-solid fa-mobile-screen-button"></i>
+                <!-- Question 2 -->
+                <div class="question-card" id="question-2">
+                    <h2>Data Collection</h2>
+                    <p class="question-text">What types of personal information do you collect? <span class="required">*</span></p>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="data-type" value="none" id="no-data-collection">
+                            <span class="checkbox-custom"></span>
+                            We don't collect any personal information
+                        </label>
+                        <div class="data-collection-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="data-type" value="name">
+                                <span class="checkbox-custom"></span>
+                                Names
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="data-type" value="email">
+                                <span class="checkbox-custom"></span>
+                                Email Addresses
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="data-type" value="address">
+                                <span class="checkbox-custom"></span>
+                                Physical Addresses
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="data-type" value="phone">
+                                <span class="checkbox-custom"></span>
+                                Phone Numbers
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="data-type" value="donation">
+                                <span class="checkbox-custom"></span>
+                                Donation Information
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="data-type" value="other">
+                                <span class="checkbox-custom"></span>
+                                Other
+                            </label>
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button class="btn back-btn" data-prev="1"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn next-btn" data-next="3">Continue <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
-                <h2>Mobile Device Policy Generator</h2>
-                <div class="launch-btn disabled-btn">
-                    Launch <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </div>
-            </div>
-        </div>
 
-        <!-- Legal Disclaimer - Moved above the toggle -->
-        <div class="disclaimer">
-            <h2>Important Legal Disclaimer</h2>
-            <p>
-                Laws and regulations can vary significantly by region, jurisdiction, and industry. The generated policies may not be legally compliant in your specific area or for your particular use case.
-            </p>
-            <p class="emphasis">
-                We strongly recommend having any generated policy reviewed and updated by qualified legal counsel before implementation or distribution to ensure it meets your specific needs and complies with all applicable laws and regulations.
-            </p>
-            <p>
-                Good Heart Tech is not a law firm and does not provide legal advice. The tools and templates provided here come with absolutely no warranty or guarantee of legal compliance.
-            </p>
-        </div>
-
-        <!-- FAQ Toggle - Now below the disclaimer with improved appearance and open by default -->
-        <div class="faq-section">
-            <button class="faq-toggle" onclick="toggleFAQ()">
-                <span>Why do you only offer these policies and not other ones?</span>
-                <div class="toggle-icon rotated">
-                    <i class="fa-solid fa-chevron-up" id="faq-icon"></i>
+                <!-- Question 3 -->
+                <div class="question-card" id="question-3">
+                    <h2>Cookie Usage</h2>
+                    <p class="question-text">Does your website use cookies? If so, what types? <span class="required">*</span></p>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="cookie-type" value="essential" id="essential-cookies" checked>
+                            <span class="checkbox-custom"></span>
+                            Essential/Functional Cookies
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="cookie-type" value="analytics" id="analytics-cookies">
+                            <span class="checkbox-custom"></span>
+                            Analytics Cookies (e.g., Google Analytics)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="cookie-type" value="marketing">
+                            <span class="checkbox-custom"></span>
+                            Marketing/Advertising Cookies
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="cookie-type" value="social">
+                            <span class="checkbox-custom"></span>
+                            Social Media Cookies
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="cookie-type" value="none">
+                            <span class="checkbox-custom"></span>
+                            We Don't Use Cookies
+                        </label>
+                    </div>
+                    <div class="button-row">
+                        <button class="btn back-btn" data-prev="2"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn next-btn" data-next="4">Continue <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
-            </button>
-            <div class="faq-content show" id="faq-answer">
-                <p>
-                    Good Heart Tech can only offer a limited number of templatized policies for legal reasons, and we want to be clear that we are not lawyers. Other types of policies tend to be much more specific to each organization and require deep consideration of the organization's unique mission, values, and operational context. These policies often need to be crafted with direct legal counsel to ensure they properly address the specific needs and circumstances of your organization.
-                </p>
+
+                <!-- Question 4 -->
+                <div class="question-card" id="question-4">
+                    <h2>Data Sharing</h2>
+                    <p class="question-text">Do you share user data with third parties? <span class="required">*</span></p>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="data-sharing" value="yes">
+                            <span class="radio-custom"></span>
+                            Yes
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="data-sharing" value="no">
+                            <span class="radio-custom"></span>
+                            No
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="data-sharing" value="limited">
+                            <span class="radio-custom"></span>
+                            Only in limited circumstances
+                        </label>
+                    </div>
+                    <div class="form-group sharing-details" style="display: none;">
+                        <label for="sharing-details">Please specify which third parties and for what purposes: <span class="required">*</span></label>
+                        <textarea id="sharing-details" rows="3" placeholder="e.g., Payment processors for donation processing, Email service providers for newsletters"></textarea>
+                    </div>
+                    <div class="button-row">
+                        <button class="btn back-btn" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn next-btn" data-next="5">Continue <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-card" id="question-5">
+                    <h2>Contact Information</h2>
+                    <div class="form-group">
+                        <label for="contact-email">What email address should users contact for privacy inquiries? <span class="required">*</span></label>
+                        <input type="email" id="contact-email" placeholder="e.g., privacy@yournonprofit.org" required>
+                    </div>
+                    <div class="button-row">
+                        <button class="btn back-btn" data-prev="4"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn generate-btn" id="generate-policy">Generate Policy <i class="fas fa-file-alt"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -102,6 +206,9 @@
                 <img src="https://graphics.goodhearttech.org/GHT-AllWhiteLogo-phishsite.png" alt="Good Heart Tech Logo" class="logo">
             </a>
             <p>&copy; <span id="current-year"></span> Good Heart Tech. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://policy.nonprofittools.org/disclaimer">Disclaimer</a>
+            </div>
         </div>
     </footer>
 

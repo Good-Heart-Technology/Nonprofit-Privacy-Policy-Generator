@@ -35,8 +35,7 @@ body {
 /* Header Styles */
 .header {
     background-color: var(--card-bg);
-    padding: 20px 0 0 0;
-    position: relative;
+    padding: 20px 0;
     box-shadow: var(--shadow);
 }
 
@@ -47,15 +46,14 @@ body {
     text-align: center;
 }
 
-.header-subline {
+.header-nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 30px;
     max-width: 1200px;
     margin: 15px auto 0;
     padding: 10px 20px;
-    background-color: var(--card-bg);
-    border-top: none;
 }
 
 .header h1 {
@@ -522,19 +520,9 @@ textarea:focus {
         font-size: 1.5rem;
     }
     
-    .header-content {
-        padding: 0 15px;
-    }
-    
-    .header-subline {
+    .header-nav {
         flex-direction: column;
         gap: 15px;
-        padding: 15px;
-    }
-    
-    .back-home, .provider {
-        width: 100%;
-        justify-content: center;
     }
     
     .footer-content {
@@ -549,6 +537,30 @@ textarea:focus {
     .footer-logo a {
         flex-direction: column;
         justify-content: center;
+    }
+    
+    .step {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
+    
+    .button-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .back-btn {
+        order: 2;
+    }
+    
+    .next-btn, .generate-btn {
+        order: 1;
     }
 }
 
@@ -594,10 +606,68 @@ input:placeholder-shown {
 
 /* Back to Home button in header */
 .back-home {
-    display: flex;
-    align-items: center;
+    display: none;
 }
 
+/* Clean up footer styling */
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Simplify media queries */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .header-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-logo, .footer-copyright, .footer-links {
+        text-align: center;
+    }
+    
+    .footer-logo a {
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .step {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
+    
+    .button-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .back-btn {
+        order: 2;
+    }
+    
+    .next-btn, .generate-btn {
+        order: 1;
+    }
+}
+
+/* Back button styling */
 .back-btn-header {
     display: flex;
     align-items: center;

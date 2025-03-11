@@ -36,7 +36,7 @@
                         <i class="fas fa-info-circle"></i>
                     </div>
                     <div class="info-content">
-                        If folks from the European Union (EU) visit your website, GPDR applies to your organization, and <a href="https://gdpr.eu/cookies/#:~:text=Receive%20users%E2%80%99%20consent%20before%20you%20use%20any%20cookies%20except%20strictly%20necessary%20cookies.">you’ll need a cookie consent banner</a>—not just a privacy policy. Users must be able to accept, reject, or manage non-essential cookies before they’re stored. <a href="https://ico.org.uk/media/for-organisations/documents/1545/cookies_guidance.pdf" target="_blank" rel="noopener">Technical details here.</a>
+                        If folks from the European Union (EU) visit your website, GPDR applies to your organization, and <a href="https://gdpr.eu/cookies/#:~:text=Receive%20users%E2%80%99%20consent%20before%20you%20use%20any%20cookies%20except%20strictly%20necessary%20cookies.">you'll need a cookie consent banner</a>—not just a privacy policy. Users must be able to accept, reject, or manage non-essential cookies before they're stored. <a href="https://ico.org.uk/media/for-organisations/documents/1545/cookies_guidance.pdf" target="_blank" rel="noopener">Technical details here.</a>
                     </div>
                 </div>
                 
@@ -54,10 +54,9 @@
                     <div class="step" data-step="3">3</div>
                     <div class="step" data-step="4">4</div>
                     <div class="step" data-step="5">5</div>
-                    <div class="step" data-step="6">6</div>
                 </div>
                 <div class="progress-labels">
-                    <span>Step <span id="current-step">1</span> of 6</span>
+                    <span>Step <span id="current-step">1</span> of 5</span>
                 </div>
             </div>
 
@@ -123,27 +122,20 @@
                             </label>
                         </div>
                     </div>
+                    <br>
+                    <div class="form-group" id="third-party-services-container" style="display: none;">
+                        <label for="third-party-services">Which third-party services or processors does your organization use to handle personal data? <span class="required">*</span></label>
+                        <p>Example: <i>Stripe for donations, Google Analytics for website tracking, Mailchimp for email newsletters</i></p>
+                        <textarea id="third-party-services" name="third-party-services" rows="4"></textarea>
+                    </div>
                     <div class="button-row">
                         <button class="btn back-btn" data-prev="1"><i class="fas fa-arrow-left"></i> Back</button>
                         <button class="btn next-btn" data-next="3">Continue <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
 
-                <!-- New Question about Third-Party Services -->
+                <!-- Question 3 (Cookie Usage) -->
                 <div class="question-card" id="question-3">
-                    <h2>Third-Party Services</h2>
-                    <p class="question-text">Which third-party services or processors does your organization use to handle personal data? (e.g., Stripe for donations, Google Analytics for website tracking, Mailchimp for email newsletters, etc.)</p>
-                    <div class="form-group">
-                        <textarea id="third-party-services" name="third-party-services" rows="4" placeholder="List your third-party service providers and what they're used for..."></textarea>
-                    </div>
-                    <div class="button-row">
-                        <button class="btn back-btn" data-prev="2"><i class="fas fa-arrow-left"></i> Back</button>
-                        <button class="btn next-btn" data-next="4">Continue <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- Question 4 (Cookie Usage) -->
-                <div class="question-card" id="question-4">
                     <h2>Cookie Usage</h2>
                     <p class="question-text">Does your website use cookies? If so, what types? <span class="required">*</span></p>
                     <div class="checkbox-group">
@@ -214,13 +206,13 @@
                         </label>
                     </div>
                     <div class="button-row">
-                        <button class="btn back-btn" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
-                        <button class="btn next-btn" data-next="5">Continue <i class="fas fa-arrow-right"></i></button>
+                        <button class="btn back-btn" data-prev="2"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn next-btn" data-next="4">Continue <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
 
-                <!-- Question 5 (Data Sharing) -->
-                <div class="question-card" id="question-5">
+                <!-- Question 4 (Data Sharing) -->
+                <div class="question-card" id="question-4">
                     <h2>Data Sharing</h2>
                     <p class="question-text">Do you share user data with third parties, excluding service providers (e.g., CRMs, email platforms, donor management tools)? <span class="required">* </span></p>
                     <div class="radio-group">
@@ -236,20 +228,20 @@
                         </label>
                     </div>
                     <div class="button-row">
-                        <button class="btn back-btn" data-prev="4"><i class="fas fa-arrow-left"></i> Back</button>
-                        <button class="btn next-btn" data-next="6">Continue <i class="fas fa-arrow-right"></i></button>
+                        <button class="btn back-btn" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn next-btn" data-next="5">Continue <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
 
-                <!-- Question 6 (Contact Information) -->
-                <div class="question-card" id="question-6">
+                <!-- Question 5 (Contact Information) -->
+                <div class="question-card" id="question-5">
                     <h2>Contact Information</h2>
                     <div class="form-group">
                         <label for="contact-email">What email address should users contact for privacy inquiries? <span class="required">*</span></label>
                         <input type="email" id="contact-email" placeholder="e.g., privacy@yournonprofit.org" required>
                     </div>
                     <div class="button-row">
-                        <button class="btn back-btn" data-prev="5"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn back-btn" data-prev="4"><i class="fas fa-arrow-left"></i> Back</button>
                         <button class="btn generate-btn" id="generate-policy">Generate Policy <i class="fas fa-file-alt"></i></button>
                     </div>
                 </div>

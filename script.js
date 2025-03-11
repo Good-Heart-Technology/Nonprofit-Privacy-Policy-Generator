@@ -29,7 +29,14 @@ function initializeFormNavigation() {
     // Next button click handlers
     nextButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const nextStep = parseInt(this.getAttribute('data-next'));
+            let nextStep = parseInt(this.getAttribute('data-next'));
+            
+            // Check if we should skip the next step based on conditions
+            const skipIfElementId = this.getAttribute('data-skip-if');
+            if (skipIfElementId && document.getElementById(skipIfElementId)?.checked) {
+                // If the element specified in data-skip-if is checked, skip to the step after next
+                nextStep = nextStep + 1;
+            }
             
             // Validate before proceeding
             if (validateCurrentStep(currentStep)) {
@@ -171,13 +178,19 @@ function validateCurrentStep(step) {
                 return false;
             }
             
+            // If collecting specific data types, validate third-party services
+            const anyDataTypeSelected = Array.from(document.querySelectorAll('.data-collection-options input[type="checkbox"]:checked')).length > 0;
+            if (anyDataTypeSelected) {
+                const thirdPartyServices = document.getElementById('third-party-services').value.trim();
+                if (!thirdPartyServices) {
+                    showValidationMessage('Please provide information about your third-party service providers.');
+                    return false;
+                }
+            }
+            
             return true;
             
         case 3:
-            // No validation needed for third-party services
-            return true;
-            
-        case 4:
             // Validate cookie usage
             const cookieCheckboxes = document.querySelectorAll('input[name="cookie-type"]:checked');
             
@@ -188,7 +201,7 @@ function validateCurrentStep(step) {
             
             return true;
             
-        case 5:
+        case 4:
             // Validate data sharing
             const dataSharingRadios = document.querySelectorAll('input[name="data-sharing"]:checked');
             
@@ -199,7 +212,7 @@ function validateCurrentStep(step) {
             
             return true;
             
-        case 6:
+        case 5:
             // Validate contact email
             const contactEmail = document.getElementById('contact-email').value.trim();
             
@@ -232,9 +245,28 @@ function initializeFormElements() {
     // DATA COLLECTION LOGIC - Question 2
     const noDataCollectionCheckbox = document.getElementById('no-data-collection');
     const dataCollectionOptions = document.querySelector('.data-collection-options');
+    const thirdPartyServicesContainer = document.getElementById('third-party-services-container');
     
     if (noDataCollectionCheckbox && dataCollectionOptions) {
         const dataTypeCheckboxes = document.querySelectorAll('.data-collection-options input[type="checkbox"]');
+        
+        // Function to check if any data type is selected and show/hide third-party services accordingly
+        function updateThirdPartyServicesVisibility() {
+            const anyDataTypeSelected = Array.from(dataTypeCheckboxes).some(checkbox => checkbox.checked);
+            
+            if (thirdPartyServicesContainer) {
+                if (anyDataTypeSelected) {
+                    thirdPartyServicesContainer.style.display = 'block';
+                } else {
+                    thirdPartyServicesContainer.style.display = 'none';
+                    // Clear the field when hiding it
+                    const thirdPartyServices = document.getElementById('third-party-services');
+                    if (thirdPartyServices) {
+                        thirdPartyServices.value = '';
+                    }
+                }
+            }
+        }
         
         // "We don't collect any personal information" checkbox
         noDataCollectionCheckbox.addEventListener('change', function() {
@@ -245,16 +277,28 @@ function initializeFormElements() {
                     checkbox.disabled = true;
                 });
                 dataCollectionOptions.classList.add('disabled');
+                
+                // Hide third-party services field
+                if (thirdPartyServicesContainer) {
+                    thirdPartyServicesContainer.style.display = 'none';
+                    const thirdPartyServices = document.getElementById('third-party-services');
+                    if (thirdPartyServices) {
+                        thirdPartyServices.value = '';
+                    }
+                }
             } else {
                 // Enable all data collection options
                 dataTypeCheckboxes.forEach(checkbox => {
                     checkbox.disabled = false;
                 });
                 dataCollectionOptions.classList.remove('disabled');
+                
+                // Check if any data type is selected and show/hide third-party services
+                updateThirdPartyServicesVisibility();
             }
         });
         
-        // Other data collection checkboxes should uncheck "We don't collect any personal information"
+        // Other data collection checkboxes
         dataTypeCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 if (this.checked && noDataCollectionCheckbox.checked) {
@@ -265,8 +309,14 @@ function initializeFormElements() {
                     });
                     dataCollectionOptions.classList.remove('disabled');
                 }
+                
+                // Check if any data type is selected and show/hide third-party services
+                updateThirdPartyServicesVisibility();
             });
         });
+        
+        // Initialize the third-party services field visibility
+        updateThirdPartyServicesVisibility();
     }
     
     // COOKIE USAGE LOGIC - Question 4
@@ -320,7 +370,7 @@ function initializePolicyGeneration() {
     if (generateButton) {
         generateButton.addEventListener('click', function() {
             // Validate the final step
-            if (validateCurrentStep(6)) {
+            if (validateCurrentStep(5)) {
                 // Generate and display the policy
                 generateAndDisplayPolicy();
             }
@@ -392,6 +442,10 @@ function convertMarkdownToPlainText(markdown) {
 
 // Function to generate and display the privacy policy
 function generateAndDisplayPolicy() {
+    // Check if no data collection is selected
+    const collectsNoData = document.getElementById('no-data-collection').checked;
+    const anyDataTypeSelected = Array.from(document.querySelectorAll('.data-collection-options input[type="checkbox"]:checked')).length > 0;
+    
     // Collect form data
     const formData = {
         organization: {
@@ -399,20 +453,16 @@ function generateAndDisplayPolicy() {
             website: document.getElementById('org-website').value.trim()
         },
         dataCollection: {
-            collectsNoData: document.getElementById('no-data-collection').checked
+            collectsNoData: collectsNoData,
+            anyDataTypeSelected: anyDataTypeSelected
         },
-        thirdPartyServices: document.getElementById('third-party-services')?.value.trim() || null,
+        thirdPartyServices: collectsNoData ? 
+            "We do not use any third-party services to process personal data as we do not collect any personal information." : 
+            (anyDataTypeSelected ? document.getElementById('third-party-services')?.value.trim() || null : null),
         cookieUsage: Array.from(document.querySelectorAll('input[name="cookie-type"]:checked')).map(cb => cb.value),
         dataSharing: document.querySelector('input[name="data-sharing"]:checked')?.value || 'no',
-        dataUsage: document.getElementById('data-usage')?.value.trim() || null,
-        dataRetention: document.getElementById('data-retention')?.value.trim() || null,
-        dataProtection: document.getElementById('data-protection')?.value.trim() || null,
-        userRights: document.getElementById('user-rights')?.value.trim() || null,
-        childrenPrivacy: document.getElementById('children-privacy')?.value.trim() || null,
-        policyChanges: document.getElementById('policy-changes')?.value.trim() || null,
         contact: {
-            email: document.getElementById('contact-email').value.trim(),
-            info: document.getElementById('contact-info')?.value.trim() || null
+            email: document.getElementById('contact-email').value.trim()
         }
     };
     
@@ -518,8 +568,10 @@ function generatePolicyContent(formData, personalDataTypes, cookieTypes, dataSha
 
 ${formData.dataCollection.collectsNoData ? 
     "We do not collect any personal information about you when you visit our website." : 
+    formData.dataCollection.anyDataTypeSelected ?
     `We collect the following types of information:
-${personalDataTypes}`}
+${personalDataTypes}` :
+    "We collect minimal information necessary to provide our services."}
 
 ## How We Use Your Information
 
@@ -528,9 +580,9 @@ ${formData.dataCollection.collectsNoData ?
     `We use the information we collect for:
 - Providing and improving our services
 - Communicating with you about our programs and services
-- Understanding how visitors use our website${formData.dataUsage ? `\n- ${formData.dataUsage}` : ''}`}
+- Understanding how visitors use our website`}
 
-${formData.thirdPartyServices && !formData.dataCollection.collectsNoData ? 
+${formData.dataCollection.anyDataTypeSelected && formData.thirdPartyServices ? 
     `\n## Third-Party Service Providers\n\nWe work with third-party providers, such as ${formData.thirdPartyServices}. These providers process data on our behalf in compliance with this policy.` : ''}
 
 ## Cookies and Tracking Technologies
@@ -546,33 +598,31 @@ ${dataSharingText}
 
 ## Data Retention
 
-${formData.dataRetention || "We retain personal information only for as long as necessary to fulfill the purposes for which it was collected, including any legal, accounting, or reporting requirements."}
+We retain personal information only for as long as necessary to fulfill the purposes for which it was collected, including any legal, accounting, or reporting requirements.
 
 ## Data Protection
 
-${formData.dataProtection || "We implement reasonable precautions to protect your information. However, no method of transmission over the Internet or electronic storage is 100% secure, so we cannot guarantee absolute security."}
+We implement reasonable precautions to protect your information. However, no method of transmission over the Internet or electronic storage is 100% secure, so we cannot guarantee absolute security.
 
 ## Your Rights
 
-${formData.userRights || "Depending on your location, you may have certain rights regarding your personal information, such as the right to access, correct, or delete your data."}
+Depending on your location, you may have certain rights regarding your personal information, such as the right to access, correct, or delete your data.
 
 To exercise your privacy rights, please email ${formData.contact.email || "[your contact email]"} with 'Privacy Request' in the subject line. We will verify your identity and respond within 30 days as required by law.
 
 ## Children's Privacy
 
-${formData.childrenPrivacy || "Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13."}
+Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.
 
 ## Changes to This Privacy Policy
 
-${formData.policyChanges || "We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page."}
+We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the effective date.
 
 ## Contact Us
 
-If you have any questions about this Privacy Policy, please contact via email at ${formData.contact.email || "[your contact email]"}
+If you have any questions about this Privacy Policy, please contact us at ${formData.contact.email || "[your contact email]"}.
 
-${formData.contactInfo ? `- ${formData.contactInfo}` : ''}
-
-Last updated: ${new Date().toLocaleDateString()}`;
+**Effective Date:** ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
 }
 
 // ===== POLICY DISPLAY =====

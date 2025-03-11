@@ -182,10 +182,6 @@
                         </label>
                         <!-- Removed "Only in limited circumstances" option -->
                     </div>
-                    <div class="form-group sharing-details" style="display: none;">
-                        <label for="sharing-details">Please specify which third parties and for what purposes: <span class="required">*</span></label>
-                        <textarea id="sharing-details" rows="3" placeholder="e.g., Payment processors for donation processing, Email service providers for newsletters"></textarea>
-                    </div>
                     <div class="button-row">
                         <button class="btn back-btn" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
                         <button class="btn next-btn" data-next="5">Continue <i class="fas fa-arrow-right"></i></button>
@@ -209,13 +205,20 @@
 
         <!-- Generated Policy Display Section -->
         <div class="policy-display" id="policy-display" style="display: none;">
-            <h2>Your Generated Privacy Policy</h2>
-            <div id="policy-content" class="policy-content"></div>
+            <div id="success-message" class="success-message" style="display: none;">Policy copied successfully!</div>
             <div class="copy-buttons">
-                <button class="btn copy-btn" data-format="markdown">Copy as Markdown</button>
-                <button class="btn copy-btn" data-format="plaintext">Copy as Plain Text</button>
-                <button class="btn copy-btn" data-format="richtext">Copy as Rich Text</button>
+                <button class="btn copy-btn" data-format="markdown">
+                    <i class="fas fa-file-code"></i> Copy as Markdown
+                </button>
+                <button class="btn copy-btn" data-format="plaintext">
+                    <i class="fas fa-file-alt"></i> Copy as Plain Text
+                </button>
+                <button class="btn copy-btn" data-format="richtext">
+                    <i class="fas fa-file-word"></i> Copy as Rich Text
+                </button>
             </div>
+            <h2>Our Privacy Policy</h2>
+            <div id="policy-content" class="policy-content"></div>
         </div>
     </main>
 

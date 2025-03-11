@@ -686,4 +686,135 @@ input:placeholder-shown {
 
 .back-btn-header i {
     margin-right: 6px;
+}
+
+/* Policy Display Section */
+.toggle-wizard-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.toggle-wizard-btn {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.toggle-wizard-btn:hover {
+    background-color: #5649c0;
+}
+
+.policy-display {
+    background-color: #2d3436;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.success-message {
+    background-color: #00b894;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success-message i {
+    margin-right: 10px;
+}
+
+.copy-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.copy-btn {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.copy-btn:hover {
+    background-color: #5649c0;
+}
+
+.policy-content-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 5px;
+    padding: 0;
+    background-color: white;
+    color: black;
+    margin-top: 20px;
+}
+
+.policy-content {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    padding: 0 20px 20px 20px;
+    margin-top: 0;
+}
+
+.policy-content h1, 
+.policy-content h2, 
+.policy-content h3 {
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.policy-content h1 {
+    font-size: 24px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.policy-content h2 {
+    font-size: 20px;
+}
+
+.policy-content h3 {
+    font-size: 18px;
+}
+
+.policy-content ul {
+    margin-left: 20px;
+    margin-bottom: 5px;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.policy-content li {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 1.2;
+}
+
+.policy-content p {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Add a new style for tight lists */
+.tight-list {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    line-height: 1.2 !important;
 } 

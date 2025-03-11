@@ -27,7 +27,7 @@
     </header>
 
     <main class="main-content">
-        <div class="wizard-container">
+        <div class="wizard-container" id="wizard-container">
             <!-- Introduction -->
             <div class="intro-section">
                 <h4>Easily generate a Privacy & Cookies Policy for use on your nonprofit's website. </h4>
@@ -67,7 +67,7 @@
                     <h2>Organization Information</h2>
                     <div class="form-group">
                         <label for="org-name">What is your nonprofit's name? <span class="required">*</span></label>
-                        <input type="text" id="org-name" placeholder="e.g., Good Heart Technology" required>
+                        <input type="text" id="org-name" placeholder="e.g., Good Heart Tech" required>
                     </div>
                     <div class="form-group">
                         <label for="org-website">What is your website URL? <span class="required">*</span></label>
@@ -168,7 +168,7 @@
                 <!-- Question 4 -->
                 <div class="question-card" id="question-4">
                     <h2>Data Sharing</h2>
-                    <p class="question-text">Do you share user data with third parties? <span class="required">*</span></p>
+                    <p class="question-text">Do you share user data with third parties, excluding service providers (e.g., CRMs, email platforms, donor management tools)? <span class="required">* </span></p>
                     <div class="radio-group">
                         <label class="radio-label">
                             <input type="radio" name="data-sharing" value="yes">
@@ -180,7 +180,6 @@
                             <span class="radio-custom"></span>
                             No
                         </label>
-                        <!-- Removed "Only in limited circumstances" option -->
                     </div>
                     <div class="button-row">
                         <button class="btn back-btn" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
@@ -203,9 +202,19 @@
             </div>
         </div>
 
+        <!-- Toggle Button for Wizard -->
+        <div class="toggle-wizard-container" id="toggle-wizard-container" style="display: none;">
+            <button class="btn toggle-wizard-btn" id="toggle-wizard-btn">
+                <i class="fas fa-chevron-down"></i> Show/Hide Form
+            </button>
+        </div>
+
         <!-- Generated Policy Display Section -->
         <div class="policy-display" id="policy-display" style="display: none;">
-            <div id="success-message" class="success-message" style="display: none;">Policy copied successfully!</div>
+            <div id="success-message" class="success-message">
+                <i class="fas fa-check-circle"></i> Your privacy policy has been generated successfully!
+            </div>
+            
             <div class="copy-buttons">
                 <button class="btn copy-btn" data-format="markdown">
                     <i class="fas fa-file-code"></i> Copy as Markdown
@@ -217,8 +226,10 @@
                     <i class="fas fa-file-word"></i> Copy as Rich Text
                 </button>
             </div>
-            <h2>Our Privacy Policy</h2>
-            <div id="policy-content" class="policy-content"></div>
+            
+            <div class="policy-content-container">
+                <div id="policy-content" class="policy-content"></div>
+            </div>
         </div>
     </main>
 

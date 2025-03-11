@@ -629,6 +629,7 @@ ${formData.dataCollection.collectsNoData ?
 Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.
 
 ## External Websites
+
 Our website may include links to third-party websites for your convenience and reference. ${formData.organization.name} is not responsible for the content, security, or privacy practices of these external sites. We encourage you to review their privacy policies before providing any personal information.
 
 ## Changes to This Privacy Policy

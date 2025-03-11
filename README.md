@@ -9,7 +9,9 @@
 
 The Nonprofit Privacy & Cookies Policy Generator is a free, user-friendly tool designed specifically for nonprofit organizations to create comprehensive privacy policies for their websites. This tool helps nonprofits comply with privacy regulations while being transparent with their users about data collection practices.
 
-This project is part of the [Nonprofit Tools](https://policy.nonprofittools.org/) suite developed by [Good Heart Technology](https://goodhearttech.org/), a nonprofit organization dedicated to providing technology resources and support to other nonprofits.
+Access this tool by navigating to: https://policy.nonprofittools.org
+
+This project is part of the [Nonprofit Tools](https://nonprofittools.org/) suite developed by [Good Heart Technology](https://goodhearttech.org/), a nonprofit organization dedicated to providing technology resources and support to other nonprofits.
 
 ## ✨ Features
 

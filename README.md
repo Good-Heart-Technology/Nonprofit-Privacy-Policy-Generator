@@ -29,7 +29,7 @@ To generate a privacy policy for your nonprofit:
 1. Visit [https://policy.nonprofittools.org/](https://policy.nonprofittools.org/)
 2. Select "Privacy & Cookies Policy Generator"
 3. Follow the step-by-step wizard to input your organization's information
-4. Review and download your generated policy
+4. Review your generated policy and upload it to your website
 
 ## 🛠️ Technology Stack
 
@@ -38,16 +38,6 @@ To generate a privacy policy for your nonprofit:
 - **Icons**: Font Awesome 6
 - **Deployment**: Cloudflare Pages
 
-## 📝 Project Structure
-
-```
-Nonprofit-Privacy-Policy-Generator/
-├── index.html          # Main application page
-├── styles.css          # CSS styling
-├── script.js           # JavaScript functionality
-├── README.md           # Project documentation
-└── LICENSE             # License information
-```
 
 ## 📄 License
 

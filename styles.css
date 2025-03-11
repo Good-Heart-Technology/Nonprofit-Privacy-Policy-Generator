@@ -1,4 +1,6 @@
-/* Base Styles */
+/* ==========================================================================
+   Base Styles and Variables
+   ========================================================================== */
 :root {
     --primary-color: #6c9ce0;
     --primary-hover: #5a89c6;
@@ -32,33 +34,37 @@ body {
     color: var(--text-color);
 }
 
-/* Header Styles */
+/* ==========================================================================
+   Header Styles
+   ========================================================================== */
 .header {
     background-color: var(--card-bg);
-    padding: 20px 0;
+    padding: 20px 30px;
     box-shadow: var(--shadow);
+    text-align: center;
 }
 
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .header-nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 15px auto 0;
-    padding: 10px 20px;
+    gap: 20px;
+    width: 100%;
+    margin-top: 15px;
 }
 
 .header h1 {
     font-size: 1.8rem;
     font-weight: 600;
+    color: var(--text-color);
     margin: 0;
 }
 
@@ -66,8 +72,8 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
     color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
 .logo {
@@ -78,12 +84,13 @@ body {
 .header-pattern {
     height: 5px;
     background: linear-gradient(90deg, var(--primary-color), var(--success-color));
-    margin-top: 0;
 }
 
-/* Main Content Styles */
+/* ==========================================================================
+   Main Content Styles
+   ========================================================================== */
 .main-content {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
 }
@@ -95,7 +102,9 @@ body {
     overflow: hidden;
 }
 
-/* Info bubble styling */
+/* ==========================================================================
+   Info Bubble Styles
+   ========================================================================== */
 .info-bubble {
     display: flex;
     background-color: rgba(108, 156, 224, 0.1);
@@ -103,6 +112,17 @@ body {
     padding: 15px;
     margin: 20px 0;
     border-left: 4px solid var(--primary-color);
+}
+
+.info-bubble.small {
+    padding: 0;
+    margin: 0 0 0 10px;
+    font-size: 0.85rem;
+    background-color: transparent;
+    border-left: none;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
 }
 
 .info-icon {
@@ -114,13 +134,67 @@ body {
     align-items: center;
 }
 
+.info-bubble.small .info-icon {
+    font-size: 1rem;
+    margin-right: 0;
+    color: var(--primary-color);
+    cursor: help;
+}
+
 .info-content {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--text-muted);
 }
 
-/* Intro section styling improvements */
+.info-bubble.small .info-content {
+    display: none;
+    position: absolute;
+    left: 25px;
+    top: -10px;
+    width: 280px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    z-index: 100; /* Ensure it's above other elements */
+    box-shadow: var(--shadow);
+    text-align: left;
+}
+
+/* Style links in info bubbles */
+.info-bubble a, 
+.info-bubble.small .info-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.info-bubble a:hover, 
+.info-bubble.small .info-content a:hover {
+    text-decoration: underline;
+}
+
+/* Add a small arrow to the tooltip */
+.info-bubble.small .info-content::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -6px;
+    border-width: 6px 6px 6px 0;
+    border-style: solid;
+    border-color: transparent var(--border-color) transparent transparent;
+}
+
+.info-bubble.small:hover .info-content {
+    display: block;
+}
+
+/* ==========================================================================
+   Introduction Section Styles
+   ========================================================================== */
 .intro-section {
     padding: 30px;
     border-bottom: 1px solid var(--border-color);
@@ -129,24 +203,25 @@ body {
 
 .intro-section h4 {
     font-size: 1.2rem;
-    margin-bottom: 15px;
     font-weight: 600;
+    margin-bottom: 15px;
     color: var(--text-color);
 }
 
 .intro-section p {
+    color: var(--text-muted);
     margin-bottom: 15px;
-    line-height: 1.7;
 }
 
 .disclaimer-link {
-    display: none;
+    margin-top: 15px;
 }
 
 .disclaimer-btn {
-    display: inline-block;
-    background-color: rgba(108, 156, 224, 0.15);
+    display: inline-flex;
+    align-items: center;
     color: var(--primary-color);
+    background-color: rgba(108, 156, 224, 0.1);
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 4px;
@@ -164,7 +239,9 @@ body {
     margin-right: 5px;
 }
 
-/* Data collection options */
+/* ==========================================================================
+   Form Element Styles
+   ========================================================================== */
 .data-collection-options {
     margin-top: 10px;
     padding-left: 15px;
@@ -208,6 +285,7 @@ body {
     justify-content: center;
     font-size: 0.9rem;
     font-weight: 600;
+    color: var(--text-color);
     transition: var(--transition);
 }
 
@@ -220,47 +298,39 @@ body {
 }
 
 .progress-labels {
-    text-align: center;
-    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
     color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-/* Question Cards */
+/* Question Forms */
 .question-forms {
-    position: relative;
-    min-height: 350px;
+    padding: 30px;
 }
 
 .question-card {
     display: none;
-    padding: 30px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    animation: fadeIn 0.3s ease;
 }
 
 .question-card.active {
     display: block;
-    opacity: 1;
-    position: relative;
 }
 
 .question-card h2 {
-    margin-bottom: 20px;
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--primary-color);
+    margin-bottom: 20px;
+    color: var(--text-color);
 }
 
 .question-text {
-    margin-bottom: 20px;
     font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: var(--text-muted);
 }
 
-/* Form Elements */
 .form-group {
     margin-bottom: 25px;
 }
@@ -268,17 +338,18 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 500;
+    color: var(--text-color);
 }
 
 input[type="text"],
 input[type="email"],
 input[type="url"],
-input[type="date"],
-textarea {
+input[type="tel"],
+input[type="number"],
+select {
     width: 100%;
     padding: 12px 15px;
-    border-radius: 6px;
+    border-radius: 4px;
     border: 1px solid var(--border-color);
     background-color: var(--input-bg);
     color: var(--text-color);
@@ -287,25 +358,23 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+select:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(108, 156, 224, 0.2);
 }
 
-/* Update textarea styling to match theme */
 textarea {
-    resize: vertical;
-    min-height: 80px;
-    font-family: inherit;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--text-color);
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 12px 15px;
     width: 100%;
+    padding: 12px 15px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
     transition: var(--transition);
 }
 
@@ -331,6 +400,18 @@ textarea:focus {
     position: relative;
     padding-left: 35px;
     user-select: none;
+    flex-wrap: nowrap;
+    margin-bottom: 15px;
+}
+
+.checkbox-label .info-bubble.small {
+    flex-basis: auto;
+    margin: 0 0 0 10px;
+    display: inline-flex;
+    border: none;
+    background: none;
+    padding: 0;
+    position: relative;
 }
 
 .checkbox-label input,
@@ -364,7 +445,7 @@ textarea:focus {
 
 .checkbox-label:hover input ~ .checkbox-custom,
 .radio-label:hover input ~ .radio-custom {
-    background-color: #2f3245;
+    background-color: rgba(108, 156, 224, 0.1);
 }
 
 .checkbox-label input:checked ~ .checkbox-custom,
@@ -386,8 +467,8 @@ textarea:focus {
 }
 
 .checkbox-label .checkbox-custom:after {
-    left: 7px;
-    top: 3px;
+    left: 8px;
+    top: 4px;
     width: 5px;
     height: 10px;
     border: solid white;
@@ -404,7 +485,7 @@ textarea:focus {
     background: white;
 }
 
-/* Buttons */
+/* Button Styles */
 .button-row {
     display: flex;
     justify-content: space-between;
@@ -412,16 +493,18 @@ textarea:focus {
 }
 
 .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 12px 24px;
-    border-radius: 6px;
-    border: none;
+    border-radius: 4px;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    border: none;
     transition: var(--transition);
+    background-color: transparent;
+    color: var(--text-color);
 }
 
 .next-btn {
@@ -434,12 +517,12 @@ textarea:focus {
 }
 
 .back-btn {
-    background-color: var(--border-color);
-    color: white;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
 }
 
 .back-btn:hover {
-    background-color: #4a4f68;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .generate-btn {
@@ -451,7 +534,9 @@ textarea:focus {
     background-color: var(--success-hover);
 }
 
-/* Footer Styles */
+/* ==========================================================================
+   Footer Styles
+   ========================================================================== */
 .footer {
     background-color: var(--card-bg);
     padding: 30px 0;
@@ -464,8 +549,8 @@ textarea:focus {
     padding: 0 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
     align-items: center;
-    gap: 20px;
 }
 
 .footer-logo {
@@ -475,19 +560,19 @@ textarea:focus {
 .footer-logo a {
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: var(--text-muted);
+    gap: 10px;
     text-decoration: none;
+    color: var(--text-muted);
 }
 
 .footer-logo span {
     font-size: 0.9rem;
-    white-space: nowrap;
+    color: var(--text-muted);
 }
 
 .footer-logo .logo {
-    height: 25px;
-    margin-left: 5px;
+    height: 30px;
+    width: auto;
 }
 
 .footer-copyright {
@@ -496,6 +581,7 @@ textarea:focus {
 
 .footer-links {
     text-align: right;
+    white-space: nowrap;
 }
 
 .footer p {
@@ -514,229 +600,128 @@ textarea:focus {
     text-decoration: underline;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 1.5rem;
-    }
-    
-    .header-nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .footer-logo, .footer-copyright, .footer-links {
-        text-align: center;
-    }
-    
-    .footer-logo a {
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .step {
-        width: 25px;
-        height: 25px;
-        font-size: 0.8rem;
-    }
-    
-    .button-row {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .back-btn {
-        order: 2;
-    }
-    
-    .next-btn, .generate-btn {
-        order: 1;
-    }
-}
-
-/* Required field indicator */
+/* ==========================================================================
+   Validation Styles
+   ========================================================================== */
 .required {
     color: #ff6b6b;
+    font-weight: bold;
     margin-left: 3px;
 }
 
-/* Validation message */
 .validation-message {
     color: #ff6b6b;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-top: 5px;
-    min-height: 20px;
+    display: none;
 }
 
-/* URL validation styles */
 input:invalid {
     border-color: #ff6b6b;
 }
 
 input:valid {
-    border-color: #4caf50;
+    border-color: var(--border-color);
 }
 
-/* Only show validation colors after user interaction */
 input:placeholder-shown {
     border-color: var(--border-color);
 }
 
-/* Disabled checkboxes */
 .checkbox-label input:disabled ~ .checkbox-custom {
-    background-color: #2a2d3e;
+    background-color: var(--border-color);
     opacity: 0.5;
     cursor: not-allowed;
 }
 
 .checkbox-label input:disabled ~ .checkbox-custom + span {
+    color: var(--text-muted);
     opacity: 0.5;
-    cursor: not-allowed;
 }
 
-/* Back to Home button in header */
+/* ==========================================================================
+   Navigation and Back Button Styles
+   ========================================================================== */
 .back-home {
-    display: none;
-}
-
-/* Clean up footer styling */
-.footer-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Simplify media queries */
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 1.5rem;
-    }
-    
-    .header-nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .footer-logo, .footer-copyright, .footer-links {
-        text-align: center;
-    }
-    
-    .footer-logo a {
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .step {
-        width: 25px;
-        height: 25px;
-        font-size: 0.8rem;
-    }
-    
-    .button-row {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .back-btn {
-        order: 2;
-    }
-    
-    .next-btn, .generate-btn {
-        order: 1;
-    }
-}
-
-/* Back button styling */
-.back-btn-header {
-    display: flex;
-    align-items: center;
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
-    font-size: 0.9rem;
-    padding: 6px 12px;
+}
+
+.back-btn-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 8px 16px;
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
     transition: var(--transition);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .back-btn-header:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .back-btn-header i {
-    margin-right: 6px;
+    font-size: 0.8rem;
 }
 
-/* Policy Display Section */
 .toggle-wizard-container {
     text-align: center;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
 .toggle-wizard-btn {
-    background-color: #6c5ce7;
-    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    font-size: 0.9rem;
+    transition: var(--transition);
 }
 
 .toggle-wizard-btn:hover {
-    background-color: #5649c0;
+    background-color: var(--input-bg);
 }
 
+/* ==========================================================================
+   Policy Display Styles
+   ========================================================================== */
 .policy-display {
-    background-color: #2d3436;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: var(--shadow);
 }
 
 .success-message {
-    background-color: #00b894;
-    color: white;
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     margin-bottom: 20px;
-    text-align: center;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .success-message i {
-    margin-right: 10px;
+    font-size: 1.5rem;
 }
 
 .copy-buttons {
     display: flex;
-    justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .copy-btn {
@@ -744,9 +729,12 @@ input:placeholder-shown {
     color: white;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .copy-btn:hover {
@@ -783,6 +771,7 @@ input:placeholder-shown {
     font-size: 24px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
+    margin-top: 0;
 }
 
 .policy-content h2 {
@@ -811,10 +800,69 @@ input:placeholder-shown {
     margin-top: 0;
 }
 
-/* Add a new style for tight lists */
 .tight-list {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
     margin-top: 0 !important;
     line-height: 1.2 !important;
+}
+
+.tight-item {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 1.2 !important;
+}
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+@media (max-width: 992px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .footer-logo, .footer-copyright, .footer-links {
+        text-align: center;
+    }
+    
+    .footer-logo a {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .header-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .step {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
+    
+    .button-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .back-btn {
+        order: 2;
+    }
+    
+    .next-btn, .generate-btn {
+        order: 1;
+    }
 } 

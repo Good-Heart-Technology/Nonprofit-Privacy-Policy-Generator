@@ -592,13 +592,14 @@ ${formData.cookieUsage.includes('none') ?
     `We use the following types of cookies and tracking technologies:
 ${cookieTypes}`}
 
+${!formData.dataCollection.collectsNoData ? `
 ## How We Share Your Information
 
 ${dataSharingText}
 
 ## Data Retention
 
-We retain personal information only for as long as necessary to fulfill the purposes for which it was collected, including any legal, accounting, or reporting requirements.
+We retain personal information only for as long as necessary to fulfill the purposes for which it was collected, including any legal, accounting, or reporting requirements.` : ''}
 
 ## Data Protection
 
@@ -606,9 +607,9 @@ We implement reasonable precautions to protect your information. However, no met
 
 ## Your Rights
 
-Depending on your location, you may have certain rights regarding your personal information, such as the right to access, correct, or delete your data.
-
-To exercise your privacy rights, please email ${formData.contact.email || "[your contact email]"} with 'Privacy Request' in the subject line. We will verify your identity and respond within 30 days as required by law.
+${formData.dataCollection.collectsNoData ? 
+    "Since we don't collect personal information, there is no personal data for you to access, correct, or delete." :
+    "Depending on your location, you may have certain rights regarding your personal information, such as the right to access, correct, or delete your data.\n\nTo exercise your privacy rights, please email " + (formData.contact.email || "[your contact email]") + " with 'Privacy Request' in the subject line. We will verify your identity and respond within 30 days as required by law."}
 
 ## Children's Privacy
 

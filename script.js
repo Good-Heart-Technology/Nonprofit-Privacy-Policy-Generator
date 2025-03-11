@@ -88,8 +88,8 @@ function initializeFormNavigation() {
     
     // Update progress bar and step indicators
     function updateProgressBar() {
-        // Update progress percentage (6 total steps)
-        const progressPercentage = ((currentStep - 1) / 6) * 100;
+        // Update progress percentage (5 total steps)
+        const progressPercentage = ((currentStep - 1) / 4) * 100;
         progressFill.style.width = `${progressPercentage}%`;
         
         // Update step text
@@ -178,12 +178,18 @@ function validateCurrentStep(step) {
                 return false;
             }
             
-            // If collecting specific data types, validate third-party services
+            // If collecting specific data types, validate third-party services and data sharing
             const anyDataTypeSelected = Array.from(document.querySelectorAll('.data-collection-options input[type="checkbox"]:checked')).length > 0;
             if (anyDataTypeSelected) {
                 const thirdPartyServices = document.getElementById('third-party-services').value.trim();
                 if (!thirdPartyServices) {
                     showValidationMessage('Please provide information about your third-party service providers.');
+                    return false;
+                }
+
+                const dataSharingRadios = document.querySelectorAll('input[name="data-sharing"]:checked');
+                if (dataSharingRadios.length === 0) {
+                    showValidationMessage('Please select whether you share user data with third parties.');
                     return false;
                 }
             }
@@ -202,17 +208,6 @@ function validateCurrentStep(step) {
             return true;
             
         case 4:
-            // Validate data sharing
-            const dataSharingRadios = document.querySelectorAll('input[name="data-sharing"]:checked');
-            
-            if (dataSharingRadios.length === 0) {
-                showValidationMessage('Please select whether you share user data with third parties.');
-                return false;
-            }
-            
-            return true;
-            
-        case 5:
             // Validate contact email
             const contactEmail = document.getElementById('contact-email').value.trim();
             
@@ -246,24 +241,31 @@ function initializeFormElements() {
     const noDataCollectionCheckbox = document.getElementById('no-data-collection');
     const dataCollectionOptions = document.querySelector('.data-collection-options');
     const thirdPartyServicesContainer = document.getElementById('third-party-services-container');
+    const dataSharingContainer = document.getElementById('data-sharing-container');
     
     if (noDataCollectionCheckbox && dataCollectionOptions) {
         const dataTypeCheckboxes = document.querySelectorAll('.data-collection-options input[type="checkbox"]');
         
         // Function to check if any data type is selected and show/hide third-party services accordingly
-        function updateThirdPartyServicesVisibility() {
+        function updateDataCollectionVisibility() {
             const anyDataTypeSelected = Array.from(dataTypeCheckboxes).some(checkbox => checkbox.checked);
             
             if (thirdPartyServicesContainer) {
                 if (anyDataTypeSelected) {
                     thirdPartyServicesContainer.style.display = 'block';
+                    dataSharingContainer.style.display = 'block';
                 } else {
                     thirdPartyServicesContainer.style.display = 'none';
-                    // Clear the field when hiding it
+                    dataSharingContainer.style.display = 'none';
+                    // Clear the fields when hiding them
                     const thirdPartyServices = document.getElementById('third-party-services');
                     if (thirdPartyServices) {
                         thirdPartyServices.value = '';
                     }
+                    // Uncheck data sharing radios
+                    document.querySelectorAll('input[name="data-sharing"]').forEach(radio => {
+                        radio.checked = false;
+                    });
                 }
             }
         }
@@ -278,13 +280,18 @@ function initializeFormElements() {
                 });
                 dataCollectionOptions.classList.add('disabled');
                 
-                // Hide third-party services field
+                // Hide third-party services and data sharing fields
                 if (thirdPartyServicesContainer) {
                     thirdPartyServicesContainer.style.display = 'none';
+                    dataSharingContainer.style.display = 'none';
                     const thirdPartyServices = document.getElementById('third-party-services');
                     if (thirdPartyServices) {
                         thirdPartyServices.value = '';
                     }
+                    // Uncheck data sharing radios
+                    document.querySelectorAll('input[name="data-sharing"]').forEach(radio => {
+                        radio.checked = false;
+                    });
                 }
             } else {
                 // Enable all data collection options
@@ -294,7 +301,7 @@ function initializeFormElements() {
                 dataCollectionOptions.classList.remove('disabled');
                 
                 // Check if any data type is selected and show/hide third-party services
-                updateThirdPartyServicesVisibility();
+                updateDataCollectionVisibility();
             }
         });
         
@@ -311,12 +318,12 @@ function initializeFormElements() {
                 }
                 
                 // Check if any data type is selected and show/hide third-party services
-                updateThirdPartyServicesVisibility();
+                updateDataCollectionVisibility();
             });
         });
         
         // Initialize the third-party services field visibility
-        updateThirdPartyServicesVisibility();
+        updateDataCollectionVisibility();
     }
     
     // COOKIE USAGE LOGIC - Question 4
@@ -370,7 +377,7 @@ function initializePolicyGeneration() {
     if (generateButton) {
         generateButton.addEventListener('click', function() {
             // Validate the final step
-            if (validateCurrentStep(5)) {
+            if (validateCurrentStep(4)) {
                 // Generate and display the policy
                 generateAndDisplayPolicy();
             }
@@ -396,8 +403,14 @@ function initializePolicyGeneration() {
                     // Convert markdown to plain text with proper formatting
                     textToCopy = convertMarkdownToPlainText(markdown);
                 } else if (format === 'richtext') {
-                    // Use the HTML content for rich text
-                    textToCopy = policyContent.innerHTML || '';
+                    // Use the HTML content but remove the style tag
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = policyContent.innerHTML;
+                    const styleTag = tempDiv.querySelector('style');
+                    if (styleTag) {
+                        styleTag.remove();
+                    }
+                    textToCopy = tempDiv.innerHTML;
                 }
             }
             

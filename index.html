@@ -54,10 +54,9 @@
                     <div class="step" data-step="2">2</div>
                     <div class="step" data-step="3">3</div>
                     <div class="step" data-step="4">4</div>
-                    <div class="step" data-step="5">5</div>
                 </div>
                 <div class="progress-labels">
-                    <span>Step <span id="current-step">1</span> of 5</span>
+                    <span>Step <span id="current-step">1</span> of 4</span>
                 </div>
             </div>
 
@@ -128,6 +127,21 @@
                         <label for="third-party-services">Which third-party services or processors does your organization use to handle personal data? <span class="required">*</span></label>
                         <p>Example: <i>Stripe for donations, Google Analytics for website tracking, Mailchimp for email newsletters</i></p>
                         <textarea id="third-party-services" name="third-party-services" rows="4"></textarea>
+                    </div>
+                    <div class="form-group" id="data-sharing-container" style="display: none;">
+                        <label>Do you share user data with third parties, excluding service providers (e.g., CRMs, email platforms, donor management tools)? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="data-sharing" value="yes">
+                                <span class="radio-custom"></span>
+                                Yes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="data-sharing" value="no">
+                                <span class="radio-custom"></span>
+                                No
+                            </label>
+                        </div>
                     </div>
                     <div class="button-row">
                         <button class="btn back-btn" data-prev="1"><i class="fas fa-arrow-left"></i> Back</button>
@@ -212,37 +226,15 @@
                     </div>
                 </div>
 
-                <!-- Question 4 (Data Sharing) -->
+                <!-- Question 4 (Contact Information) -->
                 <div class="question-card" id="question-4">
-                    <h2>Data Sharing</h2>
-                    <p class="question-text">Do you share user data with third parties, excluding service providers (e.g., CRMs, email platforms, donor management tools)? <span class="required">* </span></p>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="data-sharing" value="yes">
-                            <span class="radio-custom"></span>
-                            Yes
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="data-sharing" value="no">
-                            <span class="radio-custom"></span>
-                            No
-                        </label>
-                    </div>
-                    <div class="button-row">
-                        <button class="btn back-btn" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
-                        <button class="btn next-btn" data-next="5">Continue <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- Question 5 (Contact Information) -->
-                <div class="question-card" id="question-5">
                     <h2>Contact Information</h2>
                     <div class="form-group">
                         <label for="contact-email">What email address should users contact for privacy inquiries? <span class="required">*</span></label>
                         <input type="email" id="contact-email" placeholder="e.g., privacy@yournonprofit.org" required>
                     </div>
                     <div class="button-row">
-                        <button class="btn back-btn" data-prev="4"><i class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn back-btn" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
                         <button class="btn generate-btn" id="generate-policy">Generate Policy <i class="fas fa-file-alt"></i></button>
                     </div>
                 </div>

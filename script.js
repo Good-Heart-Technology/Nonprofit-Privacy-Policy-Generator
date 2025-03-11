@@ -362,15 +362,61 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         
-        console.log('Form data collected:', formData);
-        
-        // In a real implementation, you would:
-        // 1. Send this data to a server
-        // 2. Generate the policy document
-        // 3. Display it to the user or offer a download
-        
-        // For now, we'll just show an alert
-        alert('Your privacy policy is being generated! In a real implementation, you would see your completed policy here or be able to download it.');
+        // Generate the privacy policy content
+        const policyContent = `
+# Privacy Policy
+
+Last updated: ${new Date().toLocaleDateString()}
+
+This Privacy Policy outlines how ${formData.organization.name} ("we", "our", or "us") collects, uses, and protects your personal data when you use our services.
+
+## Organization Information
+- **Name**: ${formData.organization.name}
+- **Website**: ${formData.organization.website}
+
+## Data Collection
+${formData.dataCollection.collectsNoData ? "We do not collect any personal information." : `We collect the following types of personal information: ${formData.dataCollection.types.join(", ")}.`}
+
+## Cookie Usage
+${formData.cookieUsage.length === 0 ? "We do not use cookies." : `We use the following types of cookies: ${formData.cookieUsage.join(", ")}.`}
+
+## Data Sharing
+${formData.dataSharing.type === "no" ? "We do not share user data with third parties." : `We share user data under the following circumstances: ${formData.dataSharing.details}`}
+
+## Contact Information
+For privacy inquiries, you can contact us at: ${formData.contact.email}
+        `;
+
+        // Display the policy content
+        const policyDisplay = document.getElementById('policy-display');
+        const policyContentDiv = document.getElementById('policy-content');
+        policyContentDiv.textContent = policyContent;
+        policyDisplay.style.display = 'block';
+
+        // Copy button functionality
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        copyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const format = this.getAttribute('data-format');
+                let contentToCopy;
+
+                if (format === 'markdown') {
+                    contentToCopy = policyContent;
+                } else if (format === 'plaintext') {
+                    contentToCopy = policyContent.replace(/[#*]/g, '').replace(/\n\n/g, '\n');
+                } else if (format === 'richtext') {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = policyContent.replace(/\n/g, '<br>');
+                    contentToCopy = tempDiv.innerHTML;
+                }
+
+                navigator.clipboard.writeText(contentToCopy).then(() => {
+                    alert(`Policy copied as ${format}!`);
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+            });
+        });
     }
     
     // Add event listener for generate button
